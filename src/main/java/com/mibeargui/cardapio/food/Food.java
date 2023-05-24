@@ -1,34 +1,33 @@
 package com.mibeargui.cardapio.food;
 
-import java.util.Objects;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Table(name = "foods")
 @Entity(name = "foods")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Food {
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String title;
-	private String image;	
-	private Integer price;
-	
-	public Food() {
-	}
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private String image;
+    private Integer price;
 
-	public Food(Long id, String title, String image, Integer price) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.image = image;
-		this.price = price;
-	}
+    public Food(FoodRequestDTO data){
+        this.image = data.image();
+        this.price = data.price();
+        this.title = data.title();
+    }
 
 	public Long getId() {
 		return id;
@@ -62,22 +61,5 @@ public class Food {
 		this.price = price;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Food other = (Food) obj;
-		return Objects.equals(id, other.id);
-	}
-	
-	
+    
 }
