@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 @Table(name = "foods")
 @Entity(name = "foods")
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
